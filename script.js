@@ -1,6 +1,6 @@
 // ============================================================
 // G&M by Gift Moopelwa — Main Script
-// Ennerdale • Lenasia • Greater Gauteng
+// Ennerdale • Lenasia • Greater Gauteng • Vaal Triangle
 // ============================================================
 
 // ============ 1. MOBILE MENU ============
@@ -167,18 +167,9 @@ if (contactForm) {
         inquiries.push(inquiry);
         localStorage.setItem('gm_inquiries', JSON.stringify(inquiries));
 
-        const formAction = contactForm.getAttribute('action');
-        if (formAction.includes('YOUR-FORMSPREE-ID')) {
-            showToast(`✅ Thank you, ${name}! (Formspree not set up yet — saved locally.)`);
-            contactForm.reset();
-            if (charCount) { charCount.textContent = '0 / 500'; charCount.style.color = '#555'; }
-            console.warn('⚠️ Formspree not configured. Add your real endpoint to send emails.');
-            return;
-        }
-
         try {
             const formData = new FormData(contactForm);
-            const response = await fetch(formAction, {
+            const response = await fetch(contactForm.action, {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
@@ -208,4 +199,4 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('🌿 G&M by Gift Moopelwa | Ennerdale • Lenasia • Greater Gauteng');
+console.log('🌿 G&M by Gift Moopelwa | Ennerdale • Lenasia • Greater Gauteng • Vaal Triangle');
